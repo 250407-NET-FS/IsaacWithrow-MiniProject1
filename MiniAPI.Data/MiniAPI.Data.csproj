@@ -10,4 +10,8 @@
     <ProjectReference Include="..\MiniAPI.Models\MiniAPI.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0-preview.4.25258.110" />
+  </ItemGroup>
+
 </Project>
