@@ -1,0 +1,113 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "MiniAPI.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "MiniAPI.Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MiniAPI.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MiniAPI.Data.dll": {}
+        }
+      },
+      "MiniAPI.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/MiniAPI.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MiniAPI.Models.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MiniAPI.Data/1.0.0": {
+      "type": "project",
+      "path": "../MiniAPI.Data/MiniAPI.Data.csproj",
+      "msbuildProject": "../MiniAPI.Data/MiniAPI.Data.csproj"
+    },
+    "MiniAPI.Models/1.0.0": {
+      "type": "project",
+      "path": "../MiniAPI.Models/MiniAPI.Models.csproj",
+      "msbuildProject": "../MiniAPI.Models/MiniAPI.Models.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "MiniAPI.Data >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\eyesa\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Services\\MiniAPI.Services.csproj",
+      "projectName": "MiniAPI.Services",
+      "projectPath": "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Services\\MiniAPI.Services.csproj",
+      "packagesPath": "C:\\Users\\eyesa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Services\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\eyesa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Data\\MiniAPI.Data.csproj": {
+              "projectPath": "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Data\\MiniAPI.Data.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
