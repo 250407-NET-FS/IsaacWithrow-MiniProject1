@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "b3e96yYvaa4=",
+  "dgSpecHash": "+jJd1AUVccE=",
   "success": false,
   "projectFilePath": "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI\\MiniAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\eyesa\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\eyesa\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\eyesa\\.nuget\\packages\\mediatr\\12.5.0\\mediatr.12.5.0.nupkg.sha512",
+    "C:\\Users\\eyesa\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\eyesa\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.3.0\\microsoft.aspnetcore.authentication.2.3.0.nupkg.sha512",
     "C:\\Users\\eyesa\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",
     "C:\\Users\\eyesa\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.3.0\\microsoft.aspnetcore.authentication.cookies.2.3.0.nupkg.sha512",
