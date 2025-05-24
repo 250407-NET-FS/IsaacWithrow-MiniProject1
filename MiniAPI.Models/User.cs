@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -11,7 +12,7 @@ public class User : IdentityUser<Guid>
 
     [JsonIgnore]
     public List<Purchase>? Purchases { get; set; }
-    
+
     [Precision(18, 2)]
     public decimal Wallet { get; set; }
 }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MiniAPI.Models;
 
+[Table("Purchases")]
 public class Purchase
 {
     [Key]

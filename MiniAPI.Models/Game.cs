@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MiniAPI.Models;
 
+[Table("Games")]
 public class Game
 {
     [Key]
@@ -26,5 +27,18 @@ public class Game
     public List<Purchase>? Purchases { get; set; }
 
     public DateTime PublishDate { get; set; } = DateTime.Now;
+
+
+    public Game()
+    {
+
+    }
+
+    public Game(GameCreateDTO dto)
+    {
+        Title = dto.Title;
+        Price = dto.Price;
+        Publisher = dto.Publisher;
+    }
 
 }
