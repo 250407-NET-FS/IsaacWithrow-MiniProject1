@@ -50,7 +50,7 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[10.0.0-preview.4.25258.110, )"
+              "version": "[9.0.5, )"
             }
           },
           "imports": [
@@ -249,6 +249,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Data\\MiniAPI.Data.csproj": {
+                "projectPath": "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Data\\MiniAPI.Data.csproj"
+              },
               "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Models\\MiniAPI.Models.csproj": {
                 "projectPath": "C:\\Users\\eyesa\\OneDrive\\Desktop\\MiniProject1\\IsaacWithrow-MiniProject1\\MiniAPI.Models\\MiniAPI.Models.csproj"
               },

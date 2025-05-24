@@ -14,5 +14,5 @@ public class User : IdentityUser<Guid>
     public List<Purchase>? Purchases { get; set; }
 
     [Precision(18, 2)]
-    public decimal Wallet { get; set; }
+    public decimal Wallet { get; set; } = 0.0m;
 }

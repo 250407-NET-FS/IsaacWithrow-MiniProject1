@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MiniAPI.Data\MiniAPI.Data.csproj" />
     <ProjectReference Include="..\MiniAPI.Models\MiniAPI.Models.csproj" />
     <ProjectReference Include="..\MiniAPI.Services\MiniAPI.Services.csproj" />
   </ItemGroup>
