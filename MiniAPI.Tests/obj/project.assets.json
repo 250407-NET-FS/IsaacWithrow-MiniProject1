@@ -2724,6 +2724,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
           "Microsoft.AspNetCore.OpenApi": "9.0.5",
           "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+          "Microsoft.EntityFrameworkCore.SqlServer": "9.0.5",
           "MiniAPI.Data": "1.0.0",
           "MiniAPI.Models": "1.0.0",
           "MiniAPI.Services": "1.0.0",
