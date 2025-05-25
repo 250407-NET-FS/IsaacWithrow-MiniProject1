@@ -44,11 +44,11 @@ public class GamesController : ApiController
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateGameAsync([FromRoute] Guid id, CancellationToken ct)
+    public async Task<ActionResult> UpdateGameAsync([FromRoute] Guid id, [FromBody] GameUpdateDTO Dto, CancellationToken ct)
     {
         try
         {
-            var result = await Mediator.Send(new UpdateGame.Command { id = id }, ct);
+            var result = await Mediator.Send(new UpdateGame.Command { Id = id, Dto = Dto }, ct);
             return Ok(result);
         }
         catch (Exception e)

@@ -9,7 +9,7 @@ public class MiniAPIContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public MiniAPIContext(DbContextOptions<MiniAPIContext> options) : base(options) { }
 
-    public DbSet<Game> Game { get; set; }
+    public DbSet<Game> Games { get; set; }
 
-    public DbSet<Purchase> Purchase { get; set; }
+    public DbSet<Purchase> Purchases { get; set; }
 }

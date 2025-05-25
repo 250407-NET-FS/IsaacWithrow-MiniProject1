@@ -20,7 +20,7 @@ public class CreateGame
             Game game = new(request.Dto);
 
             // save game to database
-            //context.Games.Add(request.Dto);
+            context.Games.Add(game);
             await context.SaveChangesAsync(ct);
             return game.GameID;
         }
