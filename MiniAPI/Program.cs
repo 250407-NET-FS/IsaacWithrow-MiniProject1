@@ -4,6 +4,13 @@ using MiniAPI.Services;
 using MiniAPI.Services.Games.Commands;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore;
+using MiniAPI.Services.Auth.Commands;
+using MiniAPI.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +20,60 @@ builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 builder.Services.AddOpenApi();
 
+builder
+    .Services.AddIdentityCore<User>(options =>
+    {
+        options.Lockout.AllowedForNewUsers = false;
+        options.Password.RequireDigit = true;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = true;
+    })
+    .AddRoles<IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<MiniAPIContext>()
+    .AddSignInManager()
+    .AddRoleManager<RoleManager<IdentityRole<Guid>>>();
+
+SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!));
+
+builder
+    .Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = key,
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero,
+            NameClaimType = ClaimTypes.Name,
+            RoleClaimType = ClaimTypes.Role,
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = ctx =>
+            {
+                // grab the cookie named "jwt" and then User.Identity?.IsAuthenticated should work
+                if (ctx.Request.Cookies.TryGetValue("jwt", out var token))
+                    ctx.Token = token;
+                return Task.CompletedTask;
+            },
+        };
+    });
+
 builder.Services.AddMediatR(options =>
 {
     options.RegisterServicesFromAssemblyContaining<CreateGame.Handler>();
+    options.RegisterServicesFromAssemblyContaining<Register.Handler>();
 });
 builder.Services.AddCors(options =>
 {
