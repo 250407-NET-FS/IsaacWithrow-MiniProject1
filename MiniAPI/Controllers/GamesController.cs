@@ -5,6 +5,7 @@
 using MiniAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using MiniAPI.Services.Games.Commands;
+using MiniAPI.Services.Games.Queries;
 
 namespace MiniAPI.Controllers;
 
@@ -62,7 +63,7 @@ public class GamesController : ApiController
     {
         try
         {
-            var result = await Mediator.Send(new DeleteGame.Command { id = id }, ct);
+            var result = await Mediator.Send(new DeleteGame.Command { Id = id }, ct);
             return Ok(result);
         }
         catch (Exception e)
