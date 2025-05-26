@@ -13,7 +13,7 @@ public class Game
 
     [Required]
     [StringLength(50)]
-    public string? Title { get; set; }
+    public string Title { get; set; } = "";
 
     [Required]
     [Precision(18, 2)]
@@ -21,14 +21,14 @@ public class Game
 
     [Required]
     [StringLength(50)]
-    public string? Publisher { get; set; }
+    public string Publisher { get; set; } = "";
 
     [Required]
     [ForeignKey("OwnerID")]
     public Guid OwnerID { get; set; }
 
     [JsonIgnore]
-    public List<Purchase>? Purchases { get; set; }
+    public List<Purchase> Purchases { get; set; } = [];
 
     public DateTime PublishDate { get; set; } = DateTime.Now;
 
@@ -40,9 +40,9 @@ public class Game
 
     public Game(GameCreateDTO dto)
     {
-        Title = dto.Title;
+        Title = dto.Title!;
         Price = dto.Price;
-        Publisher = dto.Publisher;
+        Publisher = dto.Publisher!;
     }
 
 }
