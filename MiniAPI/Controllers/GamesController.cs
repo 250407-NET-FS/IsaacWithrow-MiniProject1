@@ -1,7 +1,3 @@
-
-
-
-
 using MiniAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using MiniAPI.Services.Games.Commands;

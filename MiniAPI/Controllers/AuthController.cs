@@ -1,5 +1,3 @@
-
-
 using Microsoft.AspNetCore.Mvc;
 using MiniAPI.Models;
 using MiniAPI.Services.Auth.Commands;
