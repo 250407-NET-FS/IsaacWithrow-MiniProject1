@@ -27,6 +27,7 @@ public class Register
             mapper.Map(request.Dto, user);
             user.UserName = request.Dto.Email;
             var result = await _userManager.CreateAsync(user, request.Dto.Password!);
+            await _userManager.AddToRoleAsync(user, "User");
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)

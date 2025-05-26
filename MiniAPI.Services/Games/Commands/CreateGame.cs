@@ -10,6 +10,8 @@ public class CreateGame
     public class Command : IRequest<Guid>
     {
         public required GameCreateDTO Dto { get; set; }
+
+        public required Guid OwnerID { get; set; }
     }
 
     public class Handler(MiniAPIContext context) : IRequestHandler<Command, Guid>
@@ -18,6 +20,9 @@ public class CreateGame
         {
             // create game from DTO
             Game game = new(request.Dto);
+
+            // add owner ID
+            game.OwnerID = request.OwnerID;
 
             // save game to database
             context.Games.Add(game);

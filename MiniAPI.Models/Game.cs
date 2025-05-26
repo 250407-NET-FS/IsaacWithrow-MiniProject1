@@ -23,6 +23,10 @@ public class Game
     [StringLength(50)]
     public string? Publisher { get; set; }
 
+    [Required]
+    [ForeignKey("OwnerID")]
+    public Guid OwnerID { get; set; }
+
     [JsonIgnore]
     public List<Purchase>? Purchases { get; set; }
 
