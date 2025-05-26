@@ -108,4 +108,20 @@ public class UsersController : ApiController
             return BadRequest(e.Message);
         }
     }
+
+    [Authorize]
+    [HttpPatch("wallet")]
+    public async Task<ActionResult<decimal>> AddFundsAsync([FromBody] decimal funds, CancellationToken ct)
+    {
+        try
+        {
+            User? user = await _userManager.GetUserAsync(HttpContext.User);
+            var result = await Mediator.Send(new AddUserFunds.Command{UserId = user!.Id, Funds = funds}, ct);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }
