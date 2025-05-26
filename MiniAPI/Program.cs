@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Security.Claims;
+using MiniAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -151,22 +152,20 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
-// implementing and using a service directly:
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
-try
+// For first timec
+using (var scope = app.Services.CreateScope())
 {
-    var context = services.GetRequiredService<MiniAPIContext>();
-    // will move existing migrations if there are any 
-    // that haven't been applied yet
-    await context.Database.MigrateAsync();
-    // creating seed records
-    //await DbInitializer.SeedData(context);
-}
-catch (System.Exception ex)
-{
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error occurred during migrations");
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        await Seeder.SeedAdmin(services);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Error seeding roles");
+    }
 }
 
 app.Run();
