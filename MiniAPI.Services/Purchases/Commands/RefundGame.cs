@@ -42,8 +42,6 @@ public class RefundGame
             }
 
             request.User.Wallet += p.Amount;
-            request.User.Purchases.Remove(p);
-            await _userManager.UpdateAsync(request.User);
             _context.Purchases.Remove(p);
             await _context.SaveChangesAsync(ct);
             return p;
