@@ -148,7 +148,7 @@ else
 
 app.UseCors("AzurePolicy");
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.MapControllers();
 
