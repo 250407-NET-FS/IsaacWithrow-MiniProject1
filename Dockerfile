@@ -17,4 +17,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /src
 COPY --from=build /src/MiniAPI/out ./
 EXPOSE 80
-ENTRYPOINT ["dotnet", "MiniProject.Api.dll"]
+ENTRYPOINT ["dotnet", "MiniAPI.dll"]
