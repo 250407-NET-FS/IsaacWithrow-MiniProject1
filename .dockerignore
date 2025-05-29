@@ -1,6 +1,10 @@
 bin/
 obj/
-.git
+.git/
 .vscode/
 *.suo
 *.user
+*.userosscache
+*.sln.docstates
+Dockerfile.*
+.env

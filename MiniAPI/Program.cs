@@ -125,17 +125,27 @@ builder.Services.AddDbContext<MiniAPIContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+Console.WriteLine("JWT Key: " + builder.Configuration["Jwt:Key"]);
+Console.WriteLine("Connection string: " + builder.Configuration.GetConnectionString("DefaultConnection"));
+
 var app = builder.Build();
 
+using(var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MiniAPIContext>();
+    db.Database.Migrate(); // This creates database and applies migrations
+}
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.MapOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MiniAPI v1"));
     app.UseCors("AllowReactApp");
     Console.WriteLine("allowed dev");
-    
+
 }
 else
 {

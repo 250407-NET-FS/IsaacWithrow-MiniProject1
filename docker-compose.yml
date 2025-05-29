@@ -1,35 +1,33 @@
-version: '3.8'
-
 services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - db
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=db;Database=MiniApiDb;User=sa;Password=NotPassword@123;
-    ports:
-      - "8080:80"
-    networks:
-      - app-network
-
-  db:
+  sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
     environment:
       - SA_PASSWORD=NotPassword@123
       - ACCEPT_EULA=Y
-      - MSSQL_PID=Developer
     ports:
       - "1433:1433"
     volumes:
-      - sql-data:/var/opt/mssql
-    networks:
-      - app-network
+      - sqlvolume:/var/opt/mssql
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost,1433", "-U", "sa", "-P", "NotPassword@123", "-Q", "SELECT 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
 
-networks:
-  app-network:
+  miniapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: miniapi
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MiniAPI;User Id=sa;Password=NotPassword@123;TrustServerCertificate=True;
 
 volumes:
-  sql-data:
+  sqlvolume:
