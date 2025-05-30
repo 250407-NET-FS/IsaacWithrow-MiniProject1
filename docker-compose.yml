@@ -24,7 +24,7 @@ services:
       sqlserver:
         condition: service_healthy
     ports:
-      - "5000:80"
+      - "5027:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MiniAPI;User Id=sa;Password=NotPassword@123;TrustServerCertificate=True;
