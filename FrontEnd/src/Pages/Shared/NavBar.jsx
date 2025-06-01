@@ -1,6 +1,7 @@
-import { link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { Popup } from "reactjs-popup";
+import Login from "../Login";
 import { AppBar, Container, Toolbar, Box, Button, IconButton, Typography } from "@mui/material";
 
 const NavBar = () => {
@@ -15,11 +16,34 @@ const NavBar = () => {
                 <Box>
 
                 </Box>
-                <Box>
+
+                <Box sx={{
+                        position: 'absolute',
+                        top: '1rem',
+                        right: '1rem',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '1rem', // spacing between the boxes
+                        alignItems: 'center',
+                    }}>
+                    <Typography>{user?.id ? `Welcome, ${user.email}` : "Welcome, Guest"}</Typography>
                     {user?.id ? (
-                    <Button >Logout</Button>
+                    <Button
+                        onClick={logout}
+                        sx={{
+                            color: 'rgba(255, 255, 255, 0.77)',
+                            '&:hover': {
+                            color: 'rgb(255, 255, 255)',
+                            },
+                        }}
+                    >Logout</Button>
                     ) : (<Popup
-                        trigger={<Button sx={{ color: 'white' }}>Login</Button>}
+                        trigger={<Button sx={{
+                            color: 'rgba(255, 255, 255, 0.77)',
+                            '&:hover': {
+                            color: 'rgb(255, 255, 255)',
+                            },
+                        }}>Login</Button>}
                         modal
                         nested
                         overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
@@ -33,7 +57,7 @@ const NavBar = () => {
                             fontFamily: "Arial, sans-serif",
                         }}
                     >
-                        Login
+                        <Login />
                     </Popup>)}
                 </Box>
             </Container>
