@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { Popup } from "reactjs-popup";
 import Login from "../Login";
@@ -7,13 +7,44 @@ import { AppBar, Container, Toolbar, Box, Button, IconButton, Typography } from 
 const NavBar = () => {
     const { user, logout } = useAuth();
 
-    return (
-        <AppBar>
-            <Container>
-                <Toolbar>
+    const navigate = useNavigate();
 
-                </Toolbar>
-                <Box>
+    const handleLogout = () => {
+        logout();           // Call your logout logic
+        navigate('/');      // Redirect to homepage
+    };
+
+    const homepage = () => {
+        navigate("/");
+    };
+
+    return (
+        <AppBar sx={{
+                width: '100%',
+                height: '10%',
+                bgcolor: 'rgba(35, 35, 53, 0.77)'
+            }}>
+            <Toolbar>
+            <Container sx={{
+                color: 'rgb(8, 253, 196)'
+            }}>
+                <Box sx={{
+                        position: 'absolute',
+                        top: '1rem',
+                        left: '1rem',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        gap: '1rem', // spacing between the boxes
+                        alignItems: 'center',
+                    }}>
+                    
+                    <Button onClick={homepage} to="/" 
+                    sx={{
+                            color: 'rgba(255, 255, 255, 0.77)',
+                            '&:hover': {
+                                color: 'rgb(255, 255, 255)',
+                            },
+                        }}>Home</Button>
 
                 </Box>
 
@@ -26,18 +57,30 @@ const NavBar = () => {
                         gap: '1rem', // spacing between the boxes
                         alignItems: 'center',
                     }}>
-                    <Typography>{user?.id ? `Welcome, ${user.email}` : "Welcome, Guest"}</Typography>
                     {user?.id ? (
-                    <Button
-                        onClick={logout}
-                        sx={{
+                    <><Typography component={Link} to="/profile" sx={{
+                            color: 'rgba(255, 255, 255, 0.77)',
+                            '&:hover': {
+                                color: 'rgb(255, 255, 255)',
+                            },
+                        }}>{`Welcome, ${user.firstName}`}
+                        </Typography><Button
+                            onClick={handleLogout}
+                            sx={{
+                                color: 'rgba(255, 255, 255, 0.77)',
+                                '&:hover': {
+                                    color: 'rgb(255, 255, 255)',
+                                },
+                            }}
+                        >Logout</Button></>
+                    ) : (
+                    <><Typography component={Link} to="/" sx={{
                             color: 'rgba(255, 255, 255, 0.77)',
                             '&:hover': {
                             color: 'rgb(255, 255, 255)',
                             },
-                        }}
-                    >Logout</Button>
-                    ) : (<Popup
+                        }}>{"Welcome, Guest"}</Typography>
+                    <Popup
                         trigger={<Button sx={{
                             color: 'rgba(255, 255, 255, 0.77)',
                             '&:hover': {
@@ -58,9 +101,11 @@ const NavBar = () => {
                         }}
                     >
                         <Login />
-                    </Popup>)}
+                    </Popup></>
+                    )}
                 </Box>
             </Container>
+            </Toolbar>
         </AppBar>
     )
 }

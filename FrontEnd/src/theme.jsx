@@ -5,7 +5,7 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: 'rgba(53, 53, 53, 0.77)',
+      main: 'rgba(50, 50, 50, 0.77)',
     },
     secondary: {
       main: 'rgba(0, 0, 255, 0.77)',
@@ -20,7 +20,7 @@ const theme = createTheme({
       textTransform: 'none', // disable uppercase
     },
   },
-  button: {
+  Button: {
     fontFamily: 'Roboto, sans-serif',
     button: {
       textTransform: 'none', // disable uppercase

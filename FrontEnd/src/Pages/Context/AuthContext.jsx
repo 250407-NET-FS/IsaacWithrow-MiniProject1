@@ -18,11 +18,11 @@ const normalizeClaims = (decoded) => ({
     "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
   ],
   firstName: decoded[
-    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"
-  ],
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+  ].split(" ")[0],
   lastName: decoded[
-    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"
-  ],
+    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+  ].split(" ")[1]
 });
 
 // finite state machine for authContext
