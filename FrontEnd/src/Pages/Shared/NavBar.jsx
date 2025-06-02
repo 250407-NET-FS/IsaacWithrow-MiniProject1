@@ -19,7 +19,9 @@ const NavBar = () => {
     };
 
     const createGame = () => {
-        navigate("/games/create");
+        if(user?.id){
+            navigate("/games/create");
+        }
     };
 
     return (
