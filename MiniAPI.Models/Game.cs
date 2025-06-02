@@ -29,7 +29,7 @@ public class Game
 
     // Image stored as byte array
     [Required]
-    public byte[] ImageData { get; set; } = [];
+    public string ImageData { get; set; } = "";
 
     [Required]
     [StringLength(200)]
@@ -49,11 +49,17 @@ public class Game
 
     public Game(GameCreateDTO dto)
     {
+        if (dto.Title == null) throw new ArgumentNullException(nameof(dto.Title));
+        if (dto.Publisher == null) throw new ArgumentNullException(nameof(dto.Publisher));
+        if (dto.ImageData == null) throw new ArgumentNullException(nameof(dto.ImageData));
+        if (dto.ImageMimeType == null) throw new ArgumentNullException(nameof(dto.ImageMimeType));
+
+
         Title = dto.Title!;
         Price = dto.Price;
         Publisher = dto.Publisher!;
-        ImageData = dto.ImageData;
-        ImageMimeType = dto.ImageMimeType;
+        ImageData = dto.ImageData!;
+        ImageMimeType = dto.ImageMimeType!;
     }
 
 }

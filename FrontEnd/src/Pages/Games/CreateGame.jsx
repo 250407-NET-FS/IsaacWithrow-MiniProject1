@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from "../Context/AuthContext";
+import { Link, useNavigate } from 'react-router-dom';
 import Popup from "reactjs-popup";
 import { AppBar, Container, Toolbar, Box, Button, IconButton, Typography } from "@mui/material";
 import NavBar from "../Shared/NavBar";
@@ -24,7 +25,7 @@ function CreateGame() {
 
     // Validate input fields
     if (!credentials.Title || !credentials.Price || !credentials.Publisher 
-        || !credentials.ImageData || !ImageMimeType) {
+        || !credentials.ImageData || !credentials.ImageMimeType) {
         setErrorMessage('Please fill in all fields');
         setSuccessMessage('');
         return;
@@ -45,6 +46,7 @@ function CreateGame() {
             setSuccessMessage('');
             }
     } catch (error) {
+        console.log(error);
         console.error('Creation error');
         setErrorMessage('Invalid information. Please try again.');
         setSuccessMessage('');
@@ -55,7 +57,7 @@ function CreateGame() {
     <>
     {user?.id ? true : navigate("/")}
     <NavBar />
-    <div style={{padding: 10, margin: 10, color:'black'}}>
+    <Container sx={{padding: 10, color:'white', bgcolor:'black'}}>
             <h1>Create Game</h1>
 
             {/* Alert Messages */}
@@ -120,17 +122,22 @@ function CreateGame() {
               <input
                 type="file"
                 accept="image/*"
-                onChange={async (e) => {
+                onChange={(e) => {
                     const file = e.target.files[0];
+                    if (!file) return;
+
                     const reader = new FileReader();
                     reader.onloadend = () => {
-                    setCredentials({
-                        ...credentials,
-                        ImageData: reader.result.split(',')[1], // base64 part
+                    const base64String = reader.result.split(',')[1]; // Remove "data:image/...;base64," prefix
+
+                    setCredentials(prev => ({
+                        ...prev,
+                        ImageData: base64String,  // base64 string expected by backend
                         ImageMimeType: file.type,
-                    });
+                    }));
                     };
-                    if (file) reader.readAsDataURL(file); // triggers reader.onloadend
+
+                    reader.readAsDataURL(file);  // Read file as base64 string
                 }}
                 />
             </div>
@@ -146,7 +153,7 @@ function CreateGame() {
           </form>
         </div>
       </div>
-      </div>
+      </Container>
     </>
   )
 }

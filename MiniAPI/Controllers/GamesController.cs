@@ -36,9 +36,8 @@ public class GamesController : ApiController
         try
         {
             if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid Model State");
-            }
+                return ValidationProblem(ModelState); // returns detailed validation error
+
             User? user = await _userManager.GetUserAsync(HttpContext.User);
             var result = await Mediator.Send(new CreateGame.Command { Dto = dto, OwnerID = user!.Id }, ct);
             return Ok(result);
