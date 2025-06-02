@@ -18,27 +18,20 @@ const NavBar = () => {
         navigate("/");
     };
 
+    const createGame = () => {
+        navigate("/games/create");
+    };
+
     return (
         <AppBar sx={{
                 width: '100%',
                 height: '10%',
                 bgcolor: 'rgba(35, 35, 53, 0.77)'
             }}>
-            <Toolbar>
-            <Container sx={{
-                color: 'rgb(8, 253, 196)'
-            }}>
-                <Box sx={{
-                        position: 'absolute',
-                        top: '1rem',
-                        left: '1rem',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '1rem', // spacing between the boxes
-                        alignItems: 'center',
-                    }}>
+            <Toolbar sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <Box sx={{ display: 'flex', gap: '1rem' }}>
                     
-                    <Button onClick={homepage} to="/" 
+                    <Button onClick={homepage} 
                     sx={{
                             color: 'rgba(255, 255, 255, 0.77)',
                             '&:hover': {
@@ -47,18 +40,24 @@ const NavBar = () => {
                         }}>Home</Button>
 
                 </Box>
+                <Box sx={{ display: 'flex', gap: '1rem' }}>
+                    
+                    <Button onClick={createGame} 
+                    sx={{
+                            color: 'rgba(255, 255, 255, 0.77)',
+                            '&:hover': {
+                                color: 'rgb(255, 255, 255)',
+                            },
+                        }}>Create Game</Button>
 
-                <Box sx={{
-                        position: 'absolute',
-                        top: '1rem',
-                        right: '1rem',
-                        display: 'flex',
-                        flexDirection: 'row',
-                        gap: '1rem', // spacing between the boxes
-                        alignItems: 'center',
-                    }}>
+                </Box>
+
+                <Box sx={{ display: 'flex', gap: '1rem', ml: 'auto' }}>
                     {user?.id ? (
                     <><Typography component={Link} to="/profile" sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            lineHeight: 1.2,
                             color: 'rgba(255, 255, 255, 0.77)',
                             '&:hover': {
                                 color: 'rgb(255, 255, 255)',
@@ -104,7 +103,6 @@ const NavBar = () => {
                     </Popup></>
                     )}
                 </Box>
-            </Container>
             </Toolbar>
         </AppBar>
     )
