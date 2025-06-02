@@ -27,6 +27,15 @@ public class Game
     [ForeignKey("OwnerID")]
     public Guid OwnerID { get; set; }
 
+    // Image stored as byte array
+    [Required]
+    public byte[] ImageData { get; set; } = [];
+
+    [Required]
+    [StringLength(200)]
+
+    public string ImageMimeType { get; set; } = ""; // e.g. image/jpeg
+
     [JsonIgnore]
     public List<Purchase> Purchases { get; set; } = [];
 
@@ -43,6 +52,8 @@ public class Game
         Title = dto.Title!;
         Price = dto.Price;
         Publisher = dto.Publisher!;
+        ImageData = dto.ImageData;
+        ImageMimeType = dto.ImageMimeType;
     }
 
 }

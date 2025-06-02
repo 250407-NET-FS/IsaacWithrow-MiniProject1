@@ -17,4 +17,13 @@ public class GameCreateDTO
     [Required]
     [StringLength(50)]
     public string? Publisher { get; set; }
+
+    // Image stored as byte array
+    [Required]
+    public byte[]? ImageData { get; set; }
+
+    [Required]
+    [StringLength(200)]
+
+    public string? ImageMimeType { get; set; }
 }

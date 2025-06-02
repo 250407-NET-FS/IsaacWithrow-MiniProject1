@@ -19,4 +19,13 @@ public class GameUpdateDTO
     [Required]
     [Precision(18, 2)]
     public decimal Price { get; set; }
+
+    // Image stored as byte array
+    [Required]
+    public byte[]? ImageData { get; set; }
+
+    [Required]
+    [StringLength(200)]
+
+    public string? ImageMimeType { get; set; }
 }

@@ -9,9 +9,13 @@ function Home() {
   const { user, login, logout } = useAuth();
 
   return (
-    <NavBar>
+    <>
+      <NavBar />
+      <div>
+        <img src="/tom_clancys_rainbow_six_siege_pc_game.jpg" alt="Rainbow Six Siege" disableGutters style={{ width: '100%', height: 'auto', padding: 0, margin: 0}}/>
+      </div>
+    </>
 
-    </NavBar>
   )
 }
 

@@ -126,8 +126,8 @@ builder.Services.AddDbContext<MiniAPIContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-Console.WriteLine("JWT Key: " + builder.Configuration["Jwt:Key"]);
-Console.WriteLine("Connection string: " + builder.Configuration.GetConnectionString("DefaultConnection"));
+//Console.WriteLine("JWT Key: " + builder.Configuration["Jwt:Key"]);
+//Console.WriteLine("Connection string: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 
 var app = builder.Build();
 
