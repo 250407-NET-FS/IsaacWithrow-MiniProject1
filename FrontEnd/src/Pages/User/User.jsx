@@ -17,6 +17,13 @@ const User = () => {
             } catch (error) {
                 console.error("Failed to fetch purchases:", error);
             }
+            try {
+                const response = await api.get("/purchases");
+                console.log(response.data);
+                setPurchases(response.data);
+            } catch (error) {
+                console.error("Failed to fetch purchases:", error);
+            }
   })();
     }, [])
     return (
@@ -29,15 +36,18 @@ const User = () => {
                 width: '100%',
                 height: '100%',
                 color: 'rgba(212, 212, 212, 0.9)',
-                bgcolor: 'rgba(44, 35, 84, 0.9)',
+                bgcolor: 'rgb(135, 156, 2)',
             }}>
                 <Box>
                     <CardContent>
                         <h1>Profile for {user?.firstName}</h1>
                         <br></br>
+                        <h1>First Name: {user?.firstName}</h1>
+                        <h1>Last Name: {user?.lastName}</h1>
+                        <h1>Email: {user?.email}</h1>
                     </CardContent>
                 </Box>
-                <Card sx={{ marginBottom: 2, padding: 2 }}>
+                {/* <Card sx={{ marginBottom: 2, padding: 2 }}>
                     <CardContent>
                         <h1>First Name: {user?.firstName}</h1>
                     </CardContent>
@@ -52,7 +62,7 @@ const User = () => {
                         <h1>Email: {user?.email}</h1>
                         <br></br>
                     </CardContent>
-                </Card>
+                </Card> */}
                 {Array.isArray(purchases) && purchases.map((purchase) => (
                     <Card key={purchase.PurchaseID} sx={{ marginBottom: 2, padding: 2 }}>
                         <CardContent>

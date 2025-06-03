@@ -76,9 +76,12 @@ const NavBar = () => {
                         >Logout</Button></>
                     ) : (
                     <><Typography component={Link} to="/" sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            lineHeight: 1.2,
                             color: 'rgba(255, 255, 255, 0.77)',
                             '&:hover': {
-                            color: 'rgb(255, 255, 255)',
+                                color: 'rgb(255, 255, 255)',
                             },
                         }}>{"Welcome, Guest"}</Typography>
                     <Popup
