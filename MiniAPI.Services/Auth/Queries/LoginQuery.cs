@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -35,9 +36,10 @@ public class Login
 
         public async Task<string> GenerateUserTokenAsync(User user) {
             List<Claim> claims = new List<Claim> {
-            new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email!)
+                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email!),
+                new Claim("wallet", user.Wallet.ToString(CultureInfo.InvariantCulture))
             };
             
             var roles = await _userManager.GetRolesAsync(user);

@@ -64,7 +64,7 @@ const NavBar = () => {
                             '&:hover': {
                                 color: 'rgb(255, 255, 255)',
                             },
-                        }}>{`Welcome, ${user.firstName}`}
+                        }}>{`Welcome, ${user.firstName}.  Wallet: $${user.wallet}`}
                         </Typography><Button
                             onClick={handleLogout}
                             sx={{

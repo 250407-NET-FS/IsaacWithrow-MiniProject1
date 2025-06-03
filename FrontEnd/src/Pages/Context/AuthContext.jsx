@@ -22,7 +22,8 @@ const normalizeClaims = (decoded) => ({
   ].split(" ")[0],
   lastName: decoded[
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-  ].split(" ")[1]
+  ].split(" ")[1],
+  wallet: parseFloat(decoded.wallet)
 });
 
 // finite state machine for authContext
@@ -75,6 +76,7 @@ export const AuthProvider = ({ children }) => {
         // assigns token to localStorage
         localStorage.setItem("jwt", token);
         const decoded = jwtDecode(token);
+        console.log(decoded.wallet);
         dispatch({type: "LOGIN", payload: normalizeClaims(decoded)});
         return true;
     };

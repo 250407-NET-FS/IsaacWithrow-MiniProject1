@@ -1,8 +1,10 @@
-import { Container, Box, Card, CardContent } from "@mui/material";
+import { Container, Box, Card, CardContent, Button } from "@mui/material";
 import { useAuth } from "../Context/AuthContext";
 import NavBar from "../Shared/NavBar";
 import { api } from "../Services/ApiService"; 
 import { useEffect, useState } from "react";
+import { Popup } from "reactjs-popup";
+import AddFunds from "./AddFunds";
 
 const User = () => {
     const { user } = useAuth();
@@ -26,6 +28,7 @@ const User = () => {
             }
   })();
     }, [])
+
     return (
         <>
             <NavBar />
@@ -45,6 +48,29 @@ const User = () => {
                         <h1>First Name: {user?.firstName}</h1>
                         <h1>Last Name: {user?.lastName}</h1>
                         <h1>Email: {user?.email}</h1>
+                        <h1>Wallet: ${user?.wallet}</h1>
+                        <Popup
+                        trigger={<Button sx={{
+                            color: 'rgba(255, 255, 255, 0.77)',
+                            '&:hover': {
+                            color: 'rgb(255, 255, 255)',
+                            },
+                        }}>Add Funds</Button>}
+                        modal
+                        nested
+                        overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
+                        contentStyle={{
+                            backgroundColor: "#f8f9fa",
+                            borderRadius: "10px",
+                            padding: "30px",
+                            maxWidth: "450px",
+                            margin: "100px auto",
+                            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+                            fontFamily: "Arial, sans-serif",
+                        }}
+                    >
+                        <AddFunds />
+                    </Popup>
                     </CardContent>
                 </Box>
                 {/* <Card sx={{ marginBottom: 2, padding: 2 }}>
