@@ -22,7 +22,7 @@ function ViewGames() {
                   console.error("Failed to fetch games:", error);
               }
     })();
-      }, [])
+  }, [])
   
 
   const handleClick = (game) => {
@@ -34,7 +34,7 @@ function ViewGames() {
       <Container>
         <Grid>
           {Array.isArray(games) && games.map((game) => (
-            <Card key={game.gameID} onClick={handleClick(game)} sx={{
+            <Card key={game.gameID} onClick={() => handleClick(game)} sx={{
                 cursor: 'pointer', // shows hand cursor
                 marginBottom: 2,
                 padding: 2,

@@ -35,7 +35,7 @@ const NavBar = () => {
                 bgcolor: 'rgba(35, 35, 53, 0.77)'
             }}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <Box sx={{ display: 'flex', gap: '1rem' }}>
+                <Box sx={{ display: 'flex', gap: '3rem' }}>
                     
                     <Button onClick={homepage} 
                     sx={{
@@ -46,7 +46,7 @@ const NavBar = () => {
                         }}>Home</Button>
 
                 </Box>
-                <Box sx={{ display: 'flex', gap: '1rem' }}>
+                <Box sx={{ display: 'flex', gap: '3rem' }}>
                     
                     <Button onClick={createGame} 
                     sx={{
@@ -54,11 +54,11 @@ const NavBar = () => {
                             '&:hover': {
                                 color: 'rgb(255, 255, 255)',
                             },
-                        }}>Create Game</Button>
+                        }}>Create</Button>
 
                 </Box>
 
-                <Box sx={{ display: 'flex', gap: '1rem' }}>
+                <Box sx={{ display: 'flex', gap: '3rem' }}>
                     
                     <Button onClick={viewGames} 
                     sx={{
@@ -66,7 +66,7 @@ const NavBar = () => {
                             '&:hover': {
                                 color: 'rgb(255, 255, 255)',
                             },
-                        }}>Browse Games</Button>
+                        }}>Browse</Button>
 
                 </Box>
 

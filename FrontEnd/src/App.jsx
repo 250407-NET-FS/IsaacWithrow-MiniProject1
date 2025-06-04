@@ -5,6 +5,7 @@ import Register from "./Pages/Regsiter";
 import User from "./Pages/User/User";
 import CreateGame from "./Pages/Games/CreateGame";
 import ViewGames from "./Pages/Games/ViewGames";
+import GameDetails from "./Pages/Games/GameDetails";
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
             <Route path ="/profile/:id" element={<User />}/>
             <Route path="/games/create" element={<CreateGame />}/>
             <Route path="/games" element={<ViewGames />}/>
-            <Route path="/games/:id" element={<ViewGames />}/>
+            <Route path="/games/:id" element={<GameDetails />}/>
           </Routes>
         </Router>
       </AuthProvider>

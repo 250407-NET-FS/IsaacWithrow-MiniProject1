@@ -1,4 +1,4 @@
-import { Container, Box, Card, CardContent, Button } from "@mui/material";
+import { Container, Box, Card, CardContent, Button, Typography } from "@mui/material";
 import { useAuth } from "../Context/AuthContext";
 import NavBar from "../Shared/NavBar";
 import { api } from "../Services/ApiService"; 
@@ -43,17 +43,21 @@ const User = () => {
             }}>
                 <Box>
                     <CardContent>
-                        <h1>Profile for {user?.firstName}</h1>
+                        <h1>{`Profile for ${user?.firstName}`}</h1>
                         <br></br>
-                        <h1>First Name: {user?.firstName}</h1>
-                        <h1>Last Name: {user?.lastName}</h1>
-                        <h1>Email: {user?.email}</h1>
-                        <h1>Wallet: ${user?.wallet}</h1>
+                        <h1>{`First Name: ${user?.firstName}`}</h1>
+                        <h1>{`Last Name: ${user?.lastName}`}</h1>
+                        <h1>{`Email: ${user?.email}`}</h1>
+                        <h1>{`Wallet: ${user?.wallet}`}</h1>
                         <Popup
                         trigger={<Button sx={{
-                            color: 'rgba(255, 255, 255, 0.77)',
+                            width: '15vw',
+                            height: '10vh',
+                            fontSize: 20,
+                            bgcolor: 'rgba(9, 255, 0, 0.77)',
+                            color: 'rgba(0, 0, 0, 0.77)',
                             '&:hover': {
-                            color: 'rgb(255, 255, 255)',
+                            color: 'rgb(0, 251, 255)',
                             },
                         }}>Add Funds</Button>}
                         modal
@@ -63,7 +67,7 @@ const User = () => {
                             backgroundColor: "#f8f9fa",
                             borderRadius: "10px",
                             padding: "30px",
-                            maxWidth: "450px",
+                            width: "15vw",
                             margin: "100px auto",
                             boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
                             fontFamily: "Arial, sans-serif",
@@ -90,12 +94,12 @@ const User = () => {
                     </CardContent>
                 </Card> */}
                 {Array.isArray(purchases) && purchases.map((purchase) => (
-                    <Card key={purchase.PurchaseID} sx={{ marginBottom: 2, padding: 2 }}>
+                    <Card key={purchase.purchaseID} sx={{ marginBottom: 2, padding: 2 }}>
                         <CardContent>
-                            <h1>Purchase Id: {purchase.PurchaseID}</h1>
-                            <p>Game Id: {purchase.GameID}</p>
-                            <p>Amount: {purchase.Amount}</p>
-                            <p>Date: {purchase.PurchaseDate}</p>
+                            <h1>{`Purchase Id: ${purchase.purchaseID}`}</h1>
+                            <p>{`Game Id: ${purchase.gameID}`}</p>
+                            <p>{`Amount: $${purchase.amount}`}</p>
+                            <p>{`Purhcase Date: ${new Date(purchase.purchaseDate).toLocaleDateString()}`}</p>
                         </CardContent>
                     </Card>
                 ))}

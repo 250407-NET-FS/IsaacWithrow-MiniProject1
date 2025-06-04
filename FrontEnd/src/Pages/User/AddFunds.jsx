@@ -40,7 +40,7 @@ function AddFunds(){
             if (success) {
                 setSuccessMessage('Funds successful!');
                 setErrorMessage('');
-                navigate("/profile");
+                navigate(`/profile/${user.id}`);
                 user.wallet = user.wallet + credentials.funds;
                 } else {
                 setErrorMessage('Funds failed. Please try again.');
