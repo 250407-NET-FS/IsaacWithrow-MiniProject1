@@ -4,6 +4,7 @@ import  Home  from "./Pages/Home";
 import Register from "./Pages/Regsiter";
 import User from "./Pages/User/User";
 import CreateGame from "./Pages/Games/CreateGame";
+import ViewGames from "./Pages/Games/ViewGames";
 
 function App() {
 
@@ -12,10 +13,12 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path ="/" element={<Home></Home>}></Route>
-            <Route path ="/register" element={<Register></Register>}></Route>
-            <Route path ="/profile" element={<User></User>}></Route>
-            <Route path="/games/create" element={<CreateGame></CreateGame>}></Route>
+            <Route path ="/" element={<Home />} />
+            <Route path ="/register" element={<Register />} />
+            <Route path ="/profile/:id" element={<User />}/>
+            <Route path="/games/create" element={<CreateGame />}/>
+            <Route path="/games" element={<ViewGames />}/>
+            <Route path="/games/:id" element={<ViewGames />}/>
           </Routes>
         </Router>
       </AuthProvider>

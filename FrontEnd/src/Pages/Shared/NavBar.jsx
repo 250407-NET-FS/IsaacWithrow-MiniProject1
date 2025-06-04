@@ -24,6 +24,10 @@ const NavBar = () => {
         }
     };
 
+    const viewGames = () => {
+        navigate("/games");
+    }
+
     return (
         <AppBar sx={{
                 width: '100%',
@@ -54,9 +58,21 @@ const NavBar = () => {
 
                 </Box>
 
+                <Box sx={{ display: 'flex', gap: '1rem' }}>
+                    
+                    <Button onClick={viewGames} 
+                    sx={{
+                            color: 'rgba(255, 255, 255, 0.77)',
+                            '&:hover': {
+                                color: 'rgb(255, 255, 255)',
+                            },
+                        }}>Browse Games</Button>
+
+                </Box>
+
                 <Box sx={{ display: 'flex', gap: '1rem', ml: 'auto' }}>
                     {user?.id ? (
-                    <><Typography component={Link} to="/profile" sx={{
+                    <><Typography component={Link} to={`/profile/${user?.id}`} sx={{
                             display: 'flex',
                             alignItems: 'center',
                             lineHeight: 1.2,
