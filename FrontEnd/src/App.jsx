@@ -6,6 +6,7 @@ import User from "./Pages/User/User";
 import CreateGame from "./Pages/Games/CreateGame";
 import ViewGames from "./Pages/Games/ViewGames";
 import GameDetails from "./Pages/Games/GameDetails";
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/games/create" element={<CreateGame />}/>
             <Route path="/games" element={<ViewGames />}/>
             <Route path="/games/:id" element={<GameDetails />}/>
+            <Route path="/admin" element={<AdminDashboard />}></Route>
           </Routes>
         </Router>
       </AuthProvider>

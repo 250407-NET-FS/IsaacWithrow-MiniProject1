@@ -5,10 +5,13 @@ import { api } from "../Services/ApiService";
 import { useEffect, useState } from "react";
 import { Popup } from "reactjs-popup";
 import AddFunds from "./AddFunds";
+import { Link, useNavigate } from 'react-router-dom';
 
 const User = () => {
     const { user } = useAuth();
     const [purchases, setPurchases] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
@@ -29,6 +32,10 @@ const User = () => {
   })();
     }, [])
 
+    const handleAdminDashboard = () => {
+        navigate("/admin");
+    };
+
     return (
         <>
             <NavBar />
@@ -43,12 +50,24 @@ const User = () => {
             }}>
                 <Box>
                     <CardContent>
+                        {user?.role == "Admin" ? 
+                            <Button sx={{
+                            marginTop: 10,
+                            width: '15vw',
+                            height: '10vh',
+                            fontSize: 20,
+                            bgcolor: 'rgba(9, 255, 0, 0.77)',
+                            color: 'rgba(0, 0, 0, 0.77)',
+                            '&:hover': {
+                            color: 'rgb(0, 251, 255)',
+                            },}}onClick={() => handleAdminDashboard()}>Admin DashBoard</Button>
+                        : <br></br>}
                         <h1>{`Profile for ${user?.firstName}`}</h1>
                         <br></br>
                         <h1>{`First Name: ${user?.firstName}`}</h1>
                         <h1>{`Last Name: ${user?.lastName}`}</h1>
                         <h1>{`Email: ${user?.email}`}</h1>
-                        <h1>{`Wallet: ${user?.wallet}`}</h1>
+                        <h1>{`Wallet: $${user?.wallet}`}</h1>
                         <Popup
                         trigger={<Button sx={{
                             width: '15vw',
