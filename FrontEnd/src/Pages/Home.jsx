@@ -30,7 +30,7 @@ function Home() {
           fontSize: 50,
           bgcolor: 'rgba(255, 0, 0, 0.57)',
           color: 'rgba(0, 0, 0, 0.89)',
-          border: '5px solid black' // width, style, color
+          border: '5px groove black' // width, style, color
         }}>Tom Clancy's Rainbow Six Siege Sale!</Typography>
       </div>
     </>

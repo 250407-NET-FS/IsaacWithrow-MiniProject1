@@ -66,7 +66,7 @@ function GameDetails(){
                     src={`data:${game.imageMimeType};base64,${game.imageData}`}
                     alt="Siege"
                     style={{
-                        width: '30vw',
+                        width: '25vw',
                         height: '40vh',
                         border: '5px solid black',
                         borderRadius: '10px',
@@ -85,7 +85,7 @@ function GameDetails(){
                         },
                     }}
                     >
-                    {`Purchase ${game.title}`}
+                    {game?.price != 0 ? `Purchase ${game.title}` : `Download ${game.title}`}
                     </Button>
                     : <Typography sx={textStyle}>{"Game Purchased"}</Typography>}
                 </Box>

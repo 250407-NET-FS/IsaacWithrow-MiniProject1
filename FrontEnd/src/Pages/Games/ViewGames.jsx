@@ -31,31 +31,41 @@ function ViewGames() {
   return (
     <>
       <NavBar />
-      <Container>
-        <Grid>
+      <Container sx={{ mt: 4 }}>
+        <Typography sx={{fontSize: 50, margin: 5, bgcolor: 'rgba(28, 232, 13, 0.64)', border: '5px inset black'}}>Browse Games</Typography>
+        <Grid container spacing={4}>
           {Array.isArray(games) && games.map((game) => (
-            <Card key={game.gameID} onClick={() => handleClick(game)} sx={{
-                cursor: 'pointer', // shows hand cursor
-                marginBottom: 2,
-                padding: 2,
-                border: 2,
-                borderColor: 'black',
-                backgroundImage: `url("data:${game.imageMimeType};base64,${game.imageData}")`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                color: 'white', // adjust text visibility
-                height: '20vh',
-                width: '10vw',
-                display: 'flex',
-                alignItems: 'flex-end'
-              }}>
-              <CardContent sx={{ backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '5px', fontSize: 10 }}>
-                  <p>{game.title}</p>
-                  <p>Publisher: {game.publisher}</p>
-                  <p>Price: ${game.price}</p>
-                  <p>Date: {new Date(game.publishDate).toLocaleDateString()}</p>
-              </CardContent>
-          </Card>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={game.gameID}>
+              <Card
+                onClick={() => handleClick(game)}
+                sx={{
+                  cursor: 'pointer',
+                  border: 2,
+                  borderColor: 'black',
+                  backgroundImage: `url("data:${game.imageMimeType};base64,${game.imageData}")`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  color: 'white',
+                  height: '35vh', // fixed height for visual consistency
+                  width: '20vw',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                }}
+              >
+                <CardContent sx={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  borderRadius: '5px',
+                  fontSize: 10,
+                  width: '100%',
+                  height: '5%',
+                }}>
+                  {/* <Typography variant="subtitle1">{game.title}</Typography>
+                  <Typography variant="body2">Publisher: {game.publisher}</Typography> */}
+                  <Typography variant="body2">{game?.price != 0 ? "$" + game.price : "Free"}</Typography>
+                  {/* <Typography variant="body2">Date: {new Date(game.publishDate).toLocaleDateString()}</Typography> */}
+                </CardContent>
+              </Card>
+            </Grid>
           ))}
         </Grid>
       </Container>
