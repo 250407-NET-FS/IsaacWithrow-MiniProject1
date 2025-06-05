@@ -47,7 +47,7 @@ const User = () => {
                 width: '100%',
                 height: '100%',
                 color: 'rgba(212, 212, 212, 0.9)',
-                bgcolor: 'rgb(135, 156, 2)',
+                bgcolor: 'rgb(0, 0, 0)',
             }}>
                 <Box>
                     <CardContent>
