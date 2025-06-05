@@ -9,11 +9,22 @@ import { toast } from "react-toastify";
 
 // Create Axios instance with base URL
 // This instance will be used to make API calls to the .NET backend
-const baseURL = import.meta.env.DEV
-  ? "http://localhost:5027/api" // Local .NET backend
-  : "https://jazaback-gndrbbftb8fchyf2.canadaeast-01.azurewebsites.net/api";
+function getBaseURL() {
+  // Vite (browser/dev)
+  if (typeof import.meta !== "undefined" && import.meta.env && typeof import.meta.env.DEV !== "undefined") {
+    return import.meta.env.DEV
+      ? "http://localhost:5027/api"
+      : "https://jazaback-gndrbbftb8fchyf2.canadaeast-01.azurewebsites.net/api";
+  }
+  // Jest/node
+  if (typeof process !== "undefined" && process.env && process.env.NODE_ENV === "test") {
+    return "http://localhost:5027/api";
+  }
+  // Fallback
+  return "https://jazaback-gndrbbftb8fchyf2.canadaeast-01.azurewebsites.net/api";
+}
 export const api = axios.create({
-  baseURL, // .NET API base URL
+  baseURL: getBaseURL(),
 });
 
 // Request interceptor to attach JWT token to every request
