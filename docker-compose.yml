@@ -9,11 +9,6 @@ services:
       - "1433:1433"
     volumes:
       - sqlvolume:/var/opt/mssql
-    healthcheck:
-      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost,1433", "-U", "sa", "-P", "NotPassword@123", "-Q", "SELECT 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 20
 
   miniapi:
     build:
@@ -21,13 +16,28 @@ services:
       dockerfile: Dockerfile
     container_name: miniapi
     depends_on:
-      sqlserver:
-        condition: service_healthy
+      - sqlserver
     ports:
       - "5027:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MiniAPI;User Id=sa;Password=NotPassword@123;TrustServerCertificate=True;
+  
+  frontend:
+    build:
+      context: ./FrontEnd
+      dockerfile: dockerfile.dev
+    container_name: frontend
+    ports:
+      - "3000:5173"
+    working_dir: /react-app
+    volumes:
+      - ./FrontEnd:/react-app
+      - /react-app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - miniapi
 
 volumes:
   sqlvolume:
