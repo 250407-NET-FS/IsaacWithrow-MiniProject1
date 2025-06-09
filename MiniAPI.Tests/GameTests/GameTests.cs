@@ -6,6 +6,7 @@ using MiniAPI.Services.Games.Queries;
 using MiniAPI.Models;
 using MiniAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 
 namespace MiniAPI.Tests;
@@ -85,5 +86,81 @@ public class GameTests
         // _dbMock.Verify(x => x.Add(It.IsAny<Game>()), Times.Once);
         // _dbMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         Assert.Empty(context.Games);
+    }
+
+    [Fact]
+    public async Task UpdateGameCommand_ShouldUpdateGame()
+    {
+        //Arrange
+        using var context = new MiniAPIContext(_dbOptions);
+        Game game = new Game(validGameCreateDTO);
+        game.OwnerID = validOwnerId;
+        context.Games.Add(game);
+        await context.SaveChangesAsync();
+        Assert.Single(context.Games);
+        var mapperMock = new Mock<IMapper>();
+        mapperMock
+        .Setup(m => m.Map<GameUpdateDTO, Game>(It.IsAny<GameUpdateDTO>(), It.IsAny<Game>()))
+        .Callback<GameUpdateDTO, Game>((src, dest) =>
+        {
+            dest.Title = src.Title!;
+            dest.Publisher = src.Publisher!;
+            dest.Price = src.Price;
+            dest.ImageData = src.ImageData!;
+            dest.ImageMimeType = src.ImageMimeType!;
+        });
+        var mapper = mapperMock.Object;
+        GameUpdateDTO dto = new GameUpdateDTO
+        {
+            Title = "joe",
+            Publisher = "joe",
+            Price = 0.0m,
+            ImageData = "joey",
+            ImageMimeType = "joey"
+        };
+        var command = new UpdateGame.Command
+        {
+            Id = game.GameID,
+            UserId = validOwnerId,
+            Dto = dto
+        };
+        var handler = new UpdateGame.Handler(context, mapper);
+
+        //Act
+        var result = await handler.Handle(command, CancellationToken.None);
+
+        //Assert
+        Assert.Equal(game.GameID, result);
+        //_dbMock.Verify(x => x.Add(It.IsAny<Game>()), Times.Once);
+        //_dbMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Game g = context.Games.FirstOrDefault()!;
+        Assert.Equal(dto.Price, g.Price);
+        Assert.Equal(dto.ImageData, g.ImageData);
+        Assert.Equal(dto.ImageMimeType, g.ImageMimeType);
+        Assert.Equal(dto.Title, g.Title);
+        Assert.Equal(dto.Publisher, g.Publisher);
+    }
+
+    [Fact]
+    public async Task GetAllGames_ShouldReturnGames()
+    {
+        //Arrange
+        using var context = new MiniAPIContext(_dbOptions);
+        Game game = new Game(validGameCreateDTO);
+        game.OwnerID = validOwnerId;
+        context.Games.Add(game);
+        await context.SaveChangesAsync();
+        Assert.Single(context.Games);
+        var query = new GetAllGames.Query { };
+        var handler = new GetAllGames.Handler(context);
+
+        //Act
+        var result = await handler.Handle(query, CancellationToken.None);
+
+        //Assert
+        Assert.Equal(game.GameID, result[0].GameID);
+        // _dbMock.Verify(x => x.Add(It.IsAny<Game>()), Times.Once);
+        // _dbMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+        Assert.Single(context.Games);
     }
 }

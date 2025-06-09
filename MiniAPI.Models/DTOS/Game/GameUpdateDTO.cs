@@ -22,7 +22,7 @@ public class GameUpdateDTO
 
     // Image stored as byte array
     [Required]
-    public byte[]? ImageData { get; set; }
+    public string? ImageData { get; set; }
 
     [Required]
     [StringLength(200)]
