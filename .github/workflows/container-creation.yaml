@@ -25,15 +25,15 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: /Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/miniapi-backend:latest
 
       - name: Build and push frontend
         uses: docker/build-push-action@v5
         with:
-          context: ./FrontEnd
-          file: ./FrontEnd/Dockerfile
+          context: /FrontEnd
+          file: /FrontEnd/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/miniapi-frontend:latest
 
