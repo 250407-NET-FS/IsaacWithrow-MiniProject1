@@ -36,12 +36,12 @@ jobs:
 
       - name: Install frontend dependencies
         run: npm install
-        working-directory: /JAZA-FRONT
+        working-directory: JAZA-FRONT
 
       - name: Build frontend
         run: npm run build
-        working-directory: /JAZA-FRONT
+        working-directory: JAZA-FRONT
 
       - name: Make sure all tests work
         run: npm test
-        working-directory: /JAZA-FRONT
+        working-directory: JAZA-FRONT
