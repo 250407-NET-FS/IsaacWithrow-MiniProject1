@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./FrontEnd
-          file: ./FrontEnd/Dockerfile
+          file: ./FrontEnd/dockerfile.dev
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/miniapi-frontend:latest
 
