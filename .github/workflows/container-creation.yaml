@@ -27,7 +27,7 @@ jobs:
           context: .
           file: ./IsaacWithrow-MiniProject1/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/MiniAPI-backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/miniapi-backend:latest
 
       - name: Build and push frontend
         uses: docker/build-push-action@v5
@@ -35,7 +35,7 @@ jobs:
           context: ./FrontEnd
           file: ./FrontEnd/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/MiniAPI-frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/miniapi-frontend:latest
 
   # deploy-to-azure: # a second job that runs after the build and push to dockerhub
   #   needs: build-and-push # here we say that we NEED to succesfully complete the previous job
