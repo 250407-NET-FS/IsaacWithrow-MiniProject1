@@ -44,58 +44,63 @@ const User = () => {
                 maxWidth={false}
                 disableGutters
                 sx={{
-                width: '100%',
-                height: '100%',
+                width: '100vw',
+                height: '100vh',
                 color: 'rgba(212, 212, 212, 0.9)',
                 bgcolor: 'rgb(0, 0, 0)',
             }}>
                 <Box>
-                    <CardContent>
-                        {user?.role == "Admin" ? 
-                            <Button sx={{
-                            marginTop: 10,
-                            width: '15vw',
-                            height: '10vh',
-                            fontSize: 20,
-                            bgcolor: 'rgba(9, 255, 0, 0.77)',
-                            color: 'rgba(0, 0, 0, 0.77)',
-                            '&:hover': {
-                            color: 'rgb(0, 251, 255)',
-                            },}}onClick={() => handleAdminDashboard()}>Admin DashBoard</Button>
-                        : <br></br>}
-                        <h1>{`Profile for ${user?.firstName}`}</h1>
-                        <br></br>
-                        <h1>{`First Name: ${user?.firstName}`}</h1>
-                        <h1>{`Last Name: ${user?.lastName}`}</h1>
-                        <h1>{`Email: ${user?.email}`}</h1>
-                        <h1>{`Wallet: $${user?.wallet}`}</h1>
-                        <Popup
-                        trigger={<Button sx={{
-                            width: '15vw',
-                            height: '10vh',
-                            fontSize: 20,
-                            bgcolor: 'rgba(9, 255, 0, 0.77)',
-                            color: 'rgba(0, 0, 0, 0.77)',
-                            '&:hover': {
-                            color: 'rgb(0, 251, 255)',
-                            },
-                        }}>Add Funds</Button>}
-                        modal
-                        nested
-                        overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
-                        contentStyle={{
-                            backgroundColor: "#f8f9fa",
-                            borderRadius: "10px",
-                            padding: "30px",
-                            width: "15vw",
-                            margin: "100px auto",
-                            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-                            fontFamily: "Arial, sans-serif",
-                        }}
-                    >
-                        <AddFunds />
-                    </Popup>
-                    </CardContent>
+                    <Card>
+                        <CardContent sx={{bgcolor: 'rgba(0, 0, 0, 0.9)'}}>
+                            {user?.role == "Admin" ? 
+                                <Button sx={{
+                                marginTop: 10,
+                                width: '20vw',
+                                height: '10vh',
+                                fontSize: 20,
+                                bgcolor: 'rgba(255, 0, 0, 0.77)',
+                                color: 'rgba(0, 0, 0, 0.77)',
+                                '&:hover': {
+                                color: 'rgb(0, 251, 255)',
+                                },}}onClick={() => handleAdminDashboard()}>Admin DashBoard</Button>
+                            : <br></br>}
+                            <Typography sx={{fontSize: 70, color: 'rgba(255, 255, 255, 0.9)'}}>{`Profile for ${user?.firstName}`}</Typography>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardContent sx={{}}>
+                            <Typography sx={{fontSize: 50}}>{`Email: ${user?.email}`}</Typography>
+                            <Typography sx={{fontSize: 50}}>{`First Name: ${user?.firstName}`}</Typography>
+                            <Typography sx={{fontSize: 50}}>{`Last Name: ${user?.lastName}`}</Typography>
+                            <Typography sx={{fontSize: 50}}>{`Wallet: $${user?.wallet}`}</Typography>
+                            <Popup
+                            trigger={<Button sx={{
+                                width: '20vw',
+                                height: '10vh',
+                                fontSize: 20,
+                                bgcolor: 'rgba(9, 255, 0, 0.77)',
+                                color: 'rgba(0, 0, 0, 0.77)',
+                                '&:hover': {
+                                color: 'rgb(0, 251, 255)',
+                                },
+                            }}>Add Funds</Button>}
+                            modal
+                            nested
+                            overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
+                            contentStyle={{
+                                backgroundColor: "#f8f9fa",
+                                borderRadius: "10px",
+                                padding: "30px",
+                                width: "15vw",
+                                margin: "100px auto",
+                                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+                                fontFamily: "Arial, sans-serif",
+                            }}
+                            >
+                            <AddFunds />
+                            </Popup>
+                        </CardContent>
+                    </Card>
                 </Box>
                 {/* <Card sx={{ marginBottom: 2, padding: 2 }}>
                     <CardContent>

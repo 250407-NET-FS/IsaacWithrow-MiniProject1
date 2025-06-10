@@ -145,6 +145,7 @@ function CreateGame() {
 
             {/* Submit Button */}
             <div className="form-group">
+              <br></br>
               <input
                 type="submit"
                 value="Create"
