@@ -163,4 +163,76 @@ public class GameTests
         // _dbMock.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         Assert.Single(context.Games);
     }
+
+    [Fact]
+    public async Task DeleteGame_ShouldThrowException()
+    {
+        // Arrange
+        using var context = new MiniAPIContext(_dbOptions);
+        Game game = new Game(validGameCreateDTO);
+        game.OwnerID = validOwnerId;
+        context.Games.Add(game);
+        await context.SaveChangesAsync();
+        Assert.Single(context.Games);
+
+        var command = new DeleteGame.Command
+        {
+            Id = game.GameID,
+            UserId = Guid.NewGuid()
+        };
+
+        var handler = new DeleteGame.Handler(context);
+
+        // Act and Assert
+        await Assert.ThrowsAnyAsync<Exception>(async () =>
+        {
+            await handler.Handle(command, CancellationToken.None);
+        });
+    }
+
+    [Fact]
+    public async Task UpdateGame_ShouldThrowException()
+    {
+        // Arrange
+        using var context = new MiniAPIContext(_dbOptions);
+        Game game = new Game(validGameCreateDTO);
+        game.OwnerID = validOwnerId;
+        context.Games.Add(game);
+        await context.SaveChangesAsync();
+        Assert.Single(context.Games);
+
+        var mapperMock = new Mock<IMapper>();
+        mapperMock
+        .Setup(m => m.Map<GameUpdateDTO, Game>(It.IsAny<GameUpdateDTO>(), It.IsAny<Game>()))
+        .Callback<GameUpdateDTO, Game>((src, dest) =>
+        {
+            dest.Title = src.Title!;
+            dest.Publisher = src.Publisher!;
+            dest.Price = src.Price;
+            dest.ImageData = src.ImageData!;
+            dest.ImageMimeType = src.ImageMimeType!;
+        });
+        var mapper = mapperMock.Object;
+        GameUpdateDTO dto = new GameUpdateDTO
+        {
+            Title = "joe",
+            Publisher = "joe",
+            Price = 0.0m,
+            ImageData = "joey",
+            ImageMimeType = "joey"
+        };
+        var command = new UpdateGame.Command
+        {
+            Id = game.GameID,
+            UserId = Guid.NewGuid(),
+            Dto = dto
+        };
+        var handler = new UpdateGame.Handler(context, mapper);
+
+        // Act and Assert
+        await Assert.ThrowsAnyAsync<Exception>(async () =>
+        {
+            await handler.Handle(command, CancellationToken.None);
+        });
+    }
 }
