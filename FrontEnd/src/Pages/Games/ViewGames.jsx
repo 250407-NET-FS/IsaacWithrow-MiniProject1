@@ -24,11 +24,11 @@ function ViewGames() {
               }
     })();
   }, [])
-  
 
   const handleClick = (game) => {
       navigate(`/games/${game.gameID}`, {state: {game}});
   }
+
   return (
     <>
       <NavBar />
